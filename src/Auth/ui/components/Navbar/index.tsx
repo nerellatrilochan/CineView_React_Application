@@ -2,6 +2,7 @@ import { useState, type SubmitEventHandler } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/Common'
+import { useWatchlistSnapshot } from '@/Collection'
 import { usePreferencesSnapshot } from '@/Preferences'
 import { useAuthController } from '../../controllers/useAuthController'
 import {
@@ -11,7 +12,9 @@ import {
   StyledLogo,
   StyledLogoutButton,
   StyledNavbar,
+  StyledNavBadge,
   StyledNavItem,
+  StyledNavItemContent,
   StyledNavLinks,
   StyledSearchForm,
   StyledSearchInput,
@@ -31,6 +34,7 @@ export const Navbar = () => {
   const navigate = useNavigate()
   const { session, logout } = useAuthController()
   const { language } = usePreferencesSnapshot()
+  const { totalCount } = useWatchlistSnapshot()
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleSearchSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
@@ -55,7 +59,16 @@ export const Navbar = () => {
       <StyledNavLinks aria-label={t('common:mainNavigation')}>
         {NAV_ITEMS.map(({ labelKey, to, end }) => (
           <StyledNavItem key={to} to={to} end={end}>
-            {t(labelKey)}
+            <StyledNavItemContent>
+              {t(labelKey)}
+              {to === ROUTES.WATCHLIST && totalCount > 0 && (
+                <StyledNavBadge
+                  aria-label={t('auth:nav.watchlistCount', { count: totalCount })}
+                >
+                  {totalCount}
+                </StyledNavBadge>
+              )}
+            </StyledNavItemContent>
           </StyledNavItem>
         ))}
       </StyledNavLinks>

@@ -1,3 +1,7 @@
 export { WatchlistPage } from './ui/pages/WatchlistPage'
 export { MyListsPage } from './ui/pages/MyListsPage'
 export { ListDetailPage } from './ui/pages/ListDetailPage'
+export { CollectionProvider } from './data/stores/providers'
+export { useWatchlistSnapshot } from './data/hooks/useWatchlistSnapshot'
+export { useWatchlistMediaToggle } from './data/hooks/useWatchlistMediaToggle'
+export type { WatchlistMediaType } from './core/types/Watchlist.types'

@@ -1,15 +1,41 @@
 {
-    "watchlist": {
-      "title": "Watchlist",
-      "description": "Personal watchlist — coming in Milestone 5."
+  "watchlist": {
+    "title": "Watchlist",
+    "pageDescription": "Track movies and TV shows you want to watch, are watching, or have completed.",
+    "remove": "Remove",
+    "filters": {
+      "label": "Filter watchlist by status",
+      "all": "All ({{count}})",
+      "want_to_watch": "Want to Watch ({{count}})",
+      "watching": "Watching ({{count}})",
+      "completed": "Completed ({{count}})"
     },
-    "myLists": {
-      "title": "My Lists",
-      "description": "Custom collections — coming in Milestone 6."
+    "sort": {
+      "label": "Sort by",
+      "date_added": "Date added",
+      "rating": "Rating",
+      "title": "Title"
     },
-    "listDetail": {
-      "title": "List Detail",
-      "description": "List detail — coming in Milestone 6.",
-      "descriptionWithId": "List ID: {{listId}} — coming in Milestone 6."
+    "status": {
+      "label": "Status for {{title}}",
+      "want_to_watch": "Want to Watch",
+      "watching": "Watching",
+      "completed": "Completed"
+    },
+    "empty": {
+      "title": "Your watchlist is empty",
+      "description": "Browse movies and TV shows, then tap + on any card to save them here.",
+      "filterTitle": "No items match this filter",
+      "filterDescription": "Try another status tab or add more titles to your watchlist."
     }
+  },
+  "myLists": {
+    "title": "My Lists",
+    "description": "Custom collections — coming in Milestone 6."
+  },
+  "listDetail": {
+    "title": "List Detail",
+    "description": "List detail — coming in Milestone 6.",
+    "descriptionWithId": "List ID: {{listId}} — coming in Milestone 6."
   }
+}

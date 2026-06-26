@@ -1,15 +1,41 @@
 {
-    "watchlist": {
-      "title": "Mi lista",
-      "description": "Lista personal — disponible en el hito 5."
+  "watchlist": {
+    "title": "Mi lista",
+    "pageDescription": "Sigue películas y series que quieres ver, estás viendo o ya completaste.",
+    "remove": "Quitar",
+    "filters": {
+      "label": "Filtrar lista por estado",
+      "all": "Todos ({{count}})",
+      "want_to_watch": "Quiero ver ({{count}})",
+      "watching": "Viendo ({{count}})",
+      "completed": "Completado ({{count}})"
     },
-    "myLists": {
-      "title": "Mis listas",
-      "description": "Colecciones personalizadas — disponible en el hito 6."
+    "sort": {
+      "label": "Ordenar por",
+      "date_added": "Fecha añadida",
+      "rating": "Valoración",
+      "title": "Título"
     },
-    "listDetail": {
-      "title": "Detalle de lista",
-      "description": "Detalle de lista — disponible en el hito 6.",
-      "descriptionWithId": "ID de lista: {{listId}} — disponible en el hito 6."
+    "status": {
+      "label": "Estado de {{title}}",
+      "want_to_watch": "Quiero ver",
+      "watching": "Viendo",
+      "completed": "Completado"
+    },
+    "empty": {
+      "title": "Tu lista está vacía",
+      "description": "Explora películas y series y pulsa + en cualquier tarjeta para guardarlas aquí.",
+      "filterTitle": "Ningún elemento coincide con este filtro",
+      "filterDescription": "Prueba otra pestaña de estado o añade más títulos a tu lista."
     }
+  },
+  "myLists": {
+    "title": "Mis listas",
+    "description": "Colecciones personalizadas — disponible en el hito 6."
+  },
+  "listDetail": {
+    "title": "Detalle de lista",
+    "description": "Detalle de lista — disponible en el hito 6.",
+    "descriptionWithId": "ID de lista: {{listId}} — disponible en el hito 6."
   }
+}

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { ErrorBoundary } from '@/Common'
 import { AuthProvider } from '@/Auth'
+import { CollectionProvider } from '@/Collection'
 import { PreferencesProvider } from '@/Preferences'
 import '@/Preferences/data/i18n'
 import { router } from './router'
@@ -12,9 +13,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
       <PreferencesProvider>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
+        <CollectionProvider>
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </CollectionProvider>
       </PreferencesProvider>
     </ErrorBoundary>
   </StrictMode>,

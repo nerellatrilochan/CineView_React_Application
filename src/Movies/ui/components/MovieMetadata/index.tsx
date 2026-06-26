@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { RatingBadge, WatchlistToggle } from '@/Common'
 import type { MovieDetail } from '@/Common'
+import { useWatchlistMediaToggle } from '@/Collection'
 import {
   StyledMetaList,
   StyledMetadata,
@@ -23,12 +24,19 @@ export const MovieMetadata = ({
   hasTrailer,
 }: MovieMetadataProps) => {
   const { t } = useTranslation('common')
+  const { isInWatchlist, onToggle } = useWatchlistMediaToggle({
+    mediaType: 'movie',
+    mediaId: movie.id,
+    title: movie.title,
+    posterPath: movie.poster_path,
+    rating: movie.vote_average,
+  })
 
   return (
     <StyledMetadata>
       <StyledTitleRow>
         <StyledTitle>{movie.title}</StyledTitle>
-        <WatchlistToggle />
+        <WatchlistToggle isInWatchlist={isInWatchlist} onToggle={onToggle} />
       </StyledTitleRow>
 
       {movie.tagline && <StyledTagline>{movie.tagline}</StyledTagline>}

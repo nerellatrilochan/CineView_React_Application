@@ -48,6 +48,27 @@ export const StyledNavItem = styled(NavLink)`
   }
 `
 
+export const StyledNavItemContent = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+`
+
+export const StyledNavBadge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+  border-radius: 9999px;
+  background-color: var(--cv-accent);
+  color: var(--cv-bg-primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+`
+
 export const StyledSearchForm = styled.form`
   display: flex;
   flex: 1;

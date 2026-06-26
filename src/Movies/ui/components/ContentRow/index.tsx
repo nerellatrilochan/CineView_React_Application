@@ -41,6 +41,8 @@ const ContentRowContent = ({
               posterPath={movie.poster_path}
               rating={movie.vote_average}
               to={buildMovieDetailPath(movie.id)}
+              mediaId={movie.id}
+              mediaType="movie"
             />
           ))}
         </HorizontalScrollRow>

@@ -30,6 +30,8 @@ const SearchResultGroupContent = ({ title, items }: SearchResultGroupProps) => {
                 posterPath={item.poster_path}
                 rating={item.vote_average}
                 to={buildMovieDetailPath(item.id)}
+                mediaId={item.id}
+                mediaType="movie"
               />
             )
           }
@@ -42,6 +44,8 @@ const SearchResultGroupContent = ({ title, items }: SearchResultGroupProps) => {
                 posterPath={item.poster_path}
                 rating={item.vote_average}
                 to={buildTVShowDetailPath(item.id)}
+                mediaId={item.id}
+                mediaType="tv"
               />
             )
           }
