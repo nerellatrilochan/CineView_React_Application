@@ -141,7 +141,7 @@ import type {
       return { id: 1, cast: [] }
     }
   
-    async getSeasonDetails(showId: number, seasonNumber: number): Promise<SeasonDetail> {
+    async getSeasonDetails(_showId: number, seasonNumber: number): Promise<SeasonDetail> {
       return {
         id: 1,
         name: `Season ${seasonNumber}`,

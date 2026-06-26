@@ -41,10 +41,11 @@ export const SearchPage = () => {
       <StyledHeader>
         <StyledTitle>Search</StyledTitle>
         <TextInput
+          id="search-query"
           label="Search"
           value={query}
           placeholder="Search movies, TV shows, people…"
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={setQuery}
         />
       </StyledHeader>
 

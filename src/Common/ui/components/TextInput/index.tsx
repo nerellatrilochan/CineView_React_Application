@@ -5,6 +5,7 @@ interface TextInputProps {
   label: string
   value: string
   type?: string
+  placeholder?: string
   error?: string
   autoComplete?: string
   onChange: (value: string) => void
@@ -15,6 +16,7 @@ export const TextInput = ({
   label,
   value,
   type = 'text',
+  placeholder,
   error,
   autoComplete,
   onChange,
@@ -25,6 +27,7 @@ export const TextInput = ({
       id={id}
       type={type}
       value={value}
+      placeholder={placeholder}
       autoComplete={autoComplete}
       aria-invalid={Boolean(error)}
       aria-describedby={error ? `${id}-error` : undefined}
