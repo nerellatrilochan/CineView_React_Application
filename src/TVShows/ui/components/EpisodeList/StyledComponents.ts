@@ -7,7 +7,12 @@ export const StyledSection = styled.section`
 export const StyledHeading = styled.h2`
   margin: 0 0 1rem;
   font-size: 1.25rem;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
+`
+
+export const StyledNotFoundText = styled.p`
+  margin: 0;
+  color: var(--cv-text-muted);
 `
 
 export const StyledEpisodeList = styled.ul`
@@ -24,9 +29,9 @@ export const StyledEpisodeCard = styled.li`
   grid-template-columns: 8rem 1fr;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid #334155;
+  border: 1px solid var(--cv-border);
   border-radius: 0.75rem;
-  background-color: #1e293b;
+  background-color: var(--cv-bg-secondary);
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
@@ -42,20 +47,20 @@ export const StyledEpisodeHeader = styled.div`
 export const StyledEpisodeTitle = styled.h3`
   margin: 0 0 0.25rem;
   font-size: 1rem;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
 `
 
 export const StyledEpisodeMeta = styled.p`
   margin: 0 0 0.5rem;
   font-size: 0.8125rem;
-  color: #94a3b8;
+  color: var(--cv-text-muted);
 `
 
 export const StyledEpisodeOverview = styled.p`
   margin: 0;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: #cbd5e1;
+  color: var(--cv-text-secondary);
 `
 
 export const StyledCheckbox = styled.input`

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { RatingBadge } from '@/Common'
 import type { MovieSummary } from '@/Common'
 import { getBackdropUrl } from '@/Common'
@@ -19,6 +20,7 @@ interface HeroBannerProps {
 }
 
 export const HeroBanner = ({ movie, onPlayTrailer, hasTrailer }: HeroBannerProps) => {
+  const { t } = useTranslation('common')
   const backdropUrl = getBackdropUrl(movie.backdrop_path)
 
   return (
@@ -31,7 +33,7 @@ export const HeroBanner = ({ movie, onPlayTrailer, hasTrailer }: HeroBannerProps
           <RatingBadge rating={movie.vote_average} />
           {hasTrailer && (
             <StyledTrailerButton type="button" onClick={onPlayTrailer}>
-              ▶ Watch Trailer
+              {t('watchTrailer')}
             </StyledTrailerButton>
           )}
         </StyledActions>

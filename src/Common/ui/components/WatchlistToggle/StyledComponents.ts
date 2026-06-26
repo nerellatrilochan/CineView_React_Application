@@ -6,14 +6,14 @@ export const StyledWatchlistButton = styled.button`
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border: 1px solid #334155;
+  border: 1px solid var(--cv-border);
   border-radius: 9999px;
-  background-color: rgba(15, 23, 42, 0.85);
-  color: #94a3b8;
+  background-color: color-mix(in srgb, var(--cv-bg-primary) 85%, transparent);
+  color: var(--cv-text-muted);
   cursor: not-allowed;
   opacity: 0.7;
 
   &:hover {
-    color: #e2e8f0;
+    color: var(--cv-text-secondary);
   }
 `

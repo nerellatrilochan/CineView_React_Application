@@ -1,8 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import { PlaceholderPage } from '../components/PlaceholderPage'
 
-export const NotFoundPage = () => (
-  <PlaceholderPage
-    title="404 — Page Not Found"
-    description="The page you are looking for does not exist."
-  />
-)
+export const NotFoundPage = () => {
+  const { t } = useTranslation('common')
+
+  return (
+    <PlaceholderPage
+      title={t('notFoundTitle')}
+      description={t('notFoundDescription')}
+    />
+  )
+}

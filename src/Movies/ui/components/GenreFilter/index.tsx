@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { Genre } from '@/Common'
 import { StyledChip, StyledFilterBar } from './StyledComponents'
 
@@ -11,24 +12,28 @@ export const GenreFilter = ({
   genres,
   activeGenreId,
   onSelect,
-}: GenreFilterProps) => (
-  <StyledFilterBar aria-label="Filter by genre">
-    <StyledChip
-      type="button"
-      $isActive={activeGenreId === null}
-      onClick={() => onSelect(null)}
-    >
-      All
-    </StyledChip>
-    {genres.map((genre) => (
+}: GenreFilterProps) => {
+  const { t } = useTranslation('movies')
+
+  return (
+    <StyledFilterBar aria-label={t('genreFilter.ariaLabel')}>
       <StyledChip
-        key={genre.id}
         type="button"
-        $isActive={activeGenreId === genre.id}
-        onClick={() => onSelect(genre.id)}
+        $isActive={activeGenreId === null}
+        onClick={() => onSelect(null)}
       >
-        {genre.name}
+        {t('genreFilter.all')}
       </StyledChip>
-    ))}
-  </StyledFilterBar>
-)
+      {genres.map((genre) => (
+        <StyledChip
+          key={genre.id}
+          type="button"
+          $isActive={activeGenreId === genre.id}
+          onClick={() => onSelect(genre.id)}
+        >
+          {genre.name}
+        </StyledChip>
+      ))}
+    </StyledFilterBar>
+  )
+}

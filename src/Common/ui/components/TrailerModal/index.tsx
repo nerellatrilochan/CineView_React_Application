@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { YOUTUBE_EMBED_BASE_URL } from '../../../core/constants/Tmdb.constants'
 import { Modal } from '../Modal'
 import { StyledIframe, StyledVideoWrapper } from './StyledComponents'
@@ -14,17 +15,25 @@ export const TrailerModal = ({
   youtubeKey,
   title,
   onClose,
-}: TrailerModalProps) => (
-  <Modal isOpen={isOpen} onClose={onClose} ariaLabel={`${title} trailer`}>
-    {youtubeKey && (
-      <StyledVideoWrapper>
-        <StyledIframe
-          src={`${YOUTUBE_EMBED_BASE_URL}/${youtubeKey}?autoplay=1`}
-          title={`${title} trailer`}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </StyledVideoWrapper>
-    )}
-  </Modal>
-)
+}: TrailerModalProps) => {
+  const { t } = useTranslation('common')
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      ariaLabel={t('trailerModalLabel', { title })}
+    >
+      {youtubeKey && (
+        <StyledVideoWrapper>
+          <StyledIframe
+            src={`${YOUTUBE_EMBED_BASE_URL}/${youtubeKey}?autoplay=1`}
+            title={t('trailerModalLabel', { title })}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </StyledVideoWrapper>
+      )}
+    </Modal>
+  )
+}

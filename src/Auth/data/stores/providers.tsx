@@ -1,22 +1,8 @@
-import {
-    createContext,
-    useCallback,
-    useMemo,
-    useState,
-    type ReactNode,
-  } from 'react'
-import type { LoginCredentials, Session } from '../../core/types/Auth.types'
+import { useCallback, useMemo, useState, type ReactNode } from 'react'
+import type { LoginCredentials } from '../../core/types/Auth.types'
 import { HardwiredAuthService } from '../services/AuthService/index.fixture'
 import { BrowserSessionService } from '../services/SessionService'
-  
-interface AuthContextValue {
-  session: Session | null
-  isAuthenticated: boolean
-  login: (credentials: LoginCredentials) => Promise<boolean>
-  logout: () => void
-}
-
-export const AuthContext = createContext<AuthContextValue | null>(null)
+import { AuthContext, type AuthContextValue } from './context'
 
 const authService = new HardwiredAuthService()
 const sessionService = new BrowserSessionService()
@@ -26,9 +12,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [session, setSession] = useState<Session | null>(() =>
-    sessionService.getSession(),
-  )
+  const [session, setSession] = useState(() => sessionService.getSession())
 
   const login = useCallback(async (credentials: LoginCredentials) => {
     const isValid = await authService.verifyCredentials(credentials)

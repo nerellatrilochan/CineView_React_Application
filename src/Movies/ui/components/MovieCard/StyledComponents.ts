@@ -16,7 +16,7 @@ export const StyledTitle = styled.h3`
   margin: 0.5rem 0 0;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
   line-height: 1.3;
 `
 

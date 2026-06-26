@@ -1,0 +1,33 @@
+{
+    "home": {
+      "title": "Home"
+    },
+    "rows": {
+      "trending": "Trending",
+      "popular": "Popular",
+      "topRated": "Top Rated",
+      "upcoming": "Upcoming",
+      "similar": "Similar",
+      "recommended": "Recommended",
+      "empty": "No {{title}} to display."
+    },
+    "genreFilter": {
+      "ariaLabel": "Filter by genre",
+      "all": "All"
+    },
+    "cast": {
+      "ariaLabel": "Cast",
+      "title": "Cast"
+    },
+    "detail": {
+      "notFoundTitle": "Movie Not Found",
+      "notFoundDescription": "The movie you are looking for does not exist or is unavailable."
+    },
+    "errors": {
+      "loadHero": "Failed to load hero",
+      "loadRow": "Failed to load",
+      "loadCast": "Failed to load cast",
+      "loadSimilar": "Failed to load similar movies",
+      "loadRecommended": "Failed to load recommendations"
+    }
+  }

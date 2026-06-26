@@ -1,4 +1,5 @@
 import type { SubmitEventHandler } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button, TextInput } from '@/Common'
 import {
   StyledAuthError,
@@ -37,47 +38,53 @@ export const LoginForm = ({
   onPasswordChange,
   onTogglePasswordVisibility,
   onSubmit,
-}: LoginFormProps) => (
-  <StyledCard>
-    <StyledTitle>Sign in to CineView</StyledTitle>
-    <StyledSubtitle>Browse movies and TV shows tailored for you.</StyledSubtitle>
+}: LoginFormProps) => {
+  const { t } = useTranslation('auth')
 
-    <StyledForm onSubmit={onSubmit} noValidate>
-      {authError && <StyledAuthError role="alert">{authError}</StyledAuthError>}
+  return (
+    <StyledCard>
+      <StyledTitle>{t('login.title')}</StyledTitle>
+      <StyledSubtitle>{t('login.subtitle')}</StyledSubtitle>
 
-      <TextInput
-        id="username"
-        label="Username"
-        value={username}
-        error={usernameError}
-        autoComplete="username"
-        onChange={onUsernameChange}
-      />
+      <StyledForm onSubmit={onSubmit} noValidate>
+        {authError && <StyledAuthError role="alert">{authError}</StyledAuthError>}
 
-      <StyledPasswordField>
-        <StyledPasswordInputRow>
-          <TextInput
-            id="password"
-            label="Password"
-            type={isPasswordVisible ? 'text' : 'password'}
-            value={password}
-            error={passwordError}
-            autoComplete="current-password"
-            onChange={onPasswordChange}
-          />
-          <StyledToggleButton
-            type="button"
-            aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
-            onClick={onTogglePasswordVisibility}
-          >
-            {isPasswordVisible ? 'Hide' : 'Show'}
-          </StyledToggleButton>
-        </StyledPasswordInputRow>
-      </StyledPasswordField>
+        <TextInput
+          id="username"
+          label={t('login.username')}
+          value={username}
+          error={usernameError}
+          autoComplete="username"
+          onChange={onUsernameChange}
+        />
 
-      <Button type="submit" isLoading={isSubmitting}>
-        Sign in
-      </Button>
-    </StyledForm>
-  </StyledCard>
-)
+        <StyledPasswordField>
+          <StyledPasswordInputRow>
+            <TextInput
+              id="password"
+              label={t('login.password')}
+              type={isPasswordVisible ? 'text' : 'password'}
+              value={password}
+              error={passwordError}
+              autoComplete="current-password"
+              onChange={onPasswordChange}
+            />
+            <StyledToggleButton
+              type="button"
+              aria-label={
+                isPasswordVisible ? t('login.hidePassword') : t('login.showPassword')
+              }
+              onClick={onTogglePasswordVisibility}
+            >
+              {isPasswordVisible ? t('login.hide') : t('login.show')}
+            </StyledToggleButton>
+          </StyledPasswordInputRow>
+        </StyledPasswordField>
+
+        <Button type="submit" isLoading={isSubmitting}>
+          {t('login.submit')}
+        </Button>
+      </StyledForm>
+    </StyledCard>
+  )
+}

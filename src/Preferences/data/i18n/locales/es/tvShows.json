@@ -1,0 +1,26 @@
+{
+    "seasons": {
+      "ariaLabel": "Temporadas",
+      "title": "Temporadas",
+      "fallbackName": "Temporada {{number}}",
+      "notFound": "Temporada no encontrada."
+    },
+    "episodes": {
+      "ariaLabel": "Episodios de {{seasonName}}",
+      "empty": "No hay episodios disponibles."
+    },
+    "metadata": {
+      "seasonCount_one": "{{count}} temporada",
+      "seasonCount_other": "{{count}} temporadas",
+      "episodeCount_one": "{{count}} episodio",
+      "episodeCount_other": "{{count}} episodios"
+    },
+    "detail": {
+      "notFoundTitle": "Serie no encontrada",
+      "notFoundDescription": "La serie que buscas no existe o no está disponible."
+    },
+    "errors": {
+      "loadCast": "No se pudo cargar el reparto",
+      "loadSeason": "No se pudo cargar la temporada"
+    }
+  }

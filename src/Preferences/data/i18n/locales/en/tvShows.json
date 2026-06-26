@@ -1,0 +1,26 @@
+{
+    "seasons": {
+      "ariaLabel": "Seasons",
+      "title": "Seasons",
+      "fallbackName": "Season {{number}}",
+      "notFound": "Season not found."
+    },
+    "episodes": {
+      "ariaLabel": "{{seasonName}} episodes",
+      "empty": "No episodes available."
+    },
+    "metadata": {
+      "seasonCount_one": "{{count}} season",
+      "seasonCount_other": "{{count}} seasons",
+      "episodeCount_one": "{{count}} episode",
+      "episodeCount_other": "{{count}} episodes"
+    },
+    "detail": {
+      "notFoundTitle": "TV Show Not Found",
+      "notFoundDescription": "The show you are looking for does not exist or is unavailable."
+    },
+    "errors": {
+      "loadCast": "Failed to load cast",
+      "loadSeason": "Failed to load season"
+    }
+  }

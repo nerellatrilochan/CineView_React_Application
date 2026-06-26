@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { StyledErrorContainer } from './StyledComponents'
 
 interface Props {
@@ -7,6 +8,17 @@ interface Props {
 
 interface State {
   hasError: boolean
+}
+
+const ErrorFallback = () => {
+  const { t } = useTranslation('common')
+
+  return (
+    <StyledErrorContainer>
+      <h2>{t('errorBoundaryTitle')}</h2>
+      <p>{t('errorBoundaryDescription')}</p>
+    </StyledErrorContainer>
+  )
 }
 
 export class ErrorBoundary extends Component<Props, State> {
@@ -22,12 +34,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      return (
-        <StyledErrorContainer>
-          <h2>Something went wrong.</h2>
-          <p>Please refresh the page and try again.</p>
-        </StyledErrorContainer>
-      )
+      return <ErrorFallback />
     }
 
     return this.props.children

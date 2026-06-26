@@ -1,0 +1,15 @@
+{
+    "watchlist": {
+      "title": "Mi lista",
+      "description": "Lista personal — disponible en el hito 5."
+    },
+    "myLists": {
+      "title": "Mis listas",
+      "description": "Colecciones personalizadas — disponible en el hito 6."
+    },
+    "listDetail": {
+      "title": "Detalle de lista",
+      "description": "Detalle de lista — disponible en el hito 6.",
+      "descriptionWithId": "ID de lista: {{listId}} — disponible en el hito 6."
+    }
+  }

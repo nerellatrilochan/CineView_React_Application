@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { AsyncStatus, Genre, MovieSummary } from '@/Common'
 import { tmdbService } from '@/Common'
+import { usePreferencesSnapshot } from '@/Preferences'
 
 type RowKey = 'trending' | 'popular' | 'topRated' | 'upcoming'
 
@@ -25,6 +27,9 @@ const filterByGenre = (
 }
 
 export const useHomePageController = () => {
+  const { t } = useTranslation('movies')
+  const { tmdbLanguage, region } = usePreferencesSnapshot()
+
   const [genres, setGenres] = useState<Genre[]>([])
   const [genresStatus, setGenresStatus] = useState<AsyncStatus>('idle')
   const [activeGenreId, setActiveGenreId] = useState<number | null>(null)
@@ -38,32 +43,45 @@ export const useHomePageController = () => {
     upcoming: createInitialRowState(),
   })
 
-  const loadRow = useCallback(async (key: RowKey, fetcher: () => Promise<{ results: MovieSummary[] }>) => {
-    setRows((prev) => ({
-      ...prev,
-      [key]: { ...prev[key], status: 'loading', error: null },
-    }))
-
-    try {
-      const response = await fetcher()
-      setRows((prev) => ({
-        ...prev,
-        [key]: { items: response.results, status: 'success', error: null },
-      }))
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to load'
-      setRows((prev) => ({
-        ...prev,
-        [key]: { items: [], status: 'error', error: message },
-      }))
-    }
-  }, [])
-
   useEffect(() => {
+    let cancelled = false
+
+    const loadRow = async (
+      key: RowKey,
+      fetcher: () => Promise<{ results: MovieSummary[] }>,
+    ) => {
+      await Promise.resolve()
+      if (cancelled) return
+      setRows((prev) => ({
+        ...prev,
+        [key]: { ...prev[key], status: 'loading', error: null },
+      }))
+
+      try {
+        const response = await fetcher()
+        if (cancelled) return
+        setRows((prev) => ({
+          ...prev,
+          [key]: { items: response.results, status: 'success', error: null },
+        }))
+      } catch (error) {
+        if (cancelled) return
+        const message =
+          error instanceof Error ? error.message : t('movies:errors.loadRow')
+        setRows((prev) => ({
+          ...prev,
+          [key]: { items: [], status: 'error', error: message },
+        }))
+      }
+    }
+
     const loadHero = async () => {
+      await Promise.resolve()
+      if (cancelled) return
       setHeroStatus('loading')
       try {
         const response = await tmdbService.getTrendingMovies()
+        if (cancelled) return
         const featured =
           response.results.find((movie) => movie.backdrop_path) ??
           response.results[0] ??
@@ -71,18 +89,25 @@ export const useHomePageController = () => {
         setHeroMovie(featured)
         setHeroStatus('success')
       } catch (error) {
-        setHeroError(error instanceof Error ? error.message : 'Failed to load hero')
+        if (cancelled) return
+        setHeroError(
+          error instanceof Error ? error.message : t('movies:errors.loadHero'),
+        )
         setHeroStatus('error')
       }
     }
 
     const loadGenres = async () => {
+      await Promise.resolve()
+      if (cancelled) return
       setGenresStatus('loading')
       try {
         const response = await tmdbService.getMovieGenres()
+        if (cancelled) return
         setGenres(response.genres)
         setGenresStatus('success')
       } catch {
+        if (cancelled) return
         setGenresStatus('error')
       }
     }
@@ -93,7 +118,11 @@ export const useHomePageController = () => {
     void loadRow('popular', () => tmdbService.getPopularMovies())
     void loadRow('topRated', () => tmdbService.getTopRatedMovies())
     void loadRow('upcoming', () => tmdbService.getUpcomingMovies())
-  }, [loadRow])
+
+    return () => {
+      cancelled = true
+    }
+  }, [tmdbLanguage, region, t])
 
   const filteredRows = useMemo(
     () =>

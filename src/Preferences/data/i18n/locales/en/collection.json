@@ -1,0 +1,15 @@
+{
+    "watchlist": {
+      "title": "Watchlist",
+      "description": "Personal watchlist — coming in Milestone 5."
+    },
+    "myLists": {
+      "title": "My Lists",
+      "description": "Custom collections — coming in Milestone 6."
+    },
+    "listDetail": {
+      "title": "List Detail",
+      "description": "List detail — coming in Milestone 6.",
+      "descriptionWithId": "List ID: {{listId}} — coming in Milestone 6."
+    }
+  }

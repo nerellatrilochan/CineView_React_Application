@@ -4,7 +4,7 @@ export const StyledShell = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #0f172a;
+  background-color: var(--cv-bg-primary);
 `
 
 export const StyledMain = styled.main`

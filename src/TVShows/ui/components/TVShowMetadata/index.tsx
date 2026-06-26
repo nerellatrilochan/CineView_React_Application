@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { RatingBadge, WatchlistToggle } from '@/Common'
 import type { TVShowDetail } from '@/Common'
 import {
@@ -19,34 +20,34 @@ export const TVShowMetadata = ({
   show,
   hasTrailer,
   onPlayTrailer,
-}: TVShowMetadataProps) => (
-  <StyledMetadata>
-    <StyledTitleRow>
-      <StyledTitle>{show.name}</StyledTitle>
-      <WatchlistToggle />
-    </StyledTitleRow>
+}: TVShowMetadataProps) => {
+  const { t } = useTranslation(['tvShows', 'common'])
 
-    <StyledMetaList>
-      <li>
-        <RatingBadge rating={show.vote_average} />
-      </li>
-      {show.first_air_date && <li>{show.first_air_date.slice(0, 4)}</li>}
-      <li>
-        {show.number_of_seasons} season{show.number_of_seasons !== 1 ? 's' : ''}
-      </li>
-      <li>
-        {show.number_of_episodes} episode{show.number_of_episodes !== 1 ? 's' : ''}
-      </li>
-      <li>{show.status}</li>
-      <li>{show.genres.map((g) => g.name).join(', ')}</li>
-    </StyledMetaList>
+  return (
+    <StyledMetadata>
+      <StyledTitleRow>
+        <StyledTitle>{show.name}</StyledTitle>
+        <WatchlistToggle />
+      </StyledTitleRow>
 
-    {hasTrailer && (
-      <StyledTrailerButton type="button" onClick={onPlayTrailer}>
-        ▶ Watch Trailer
-      </StyledTrailerButton>
-    )}
+      <StyledMetaList>
+        <li>
+          <RatingBadge rating={show.vote_average} />
+        </li>
+        {show.first_air_date && <li>{show.first_air_date.slice(0, 4)}</li>}
+        <li>{t('tvShows:metadata.seasonCount', { count: show.number_of_seasons })}</li>
+        <li>{t('tvShows:metadata.episodeCount', { count: show.number_of_episodes })}</li>
+        <li>{show.status}</li>
+        <li>{show.genres.map((genre) => genre.name).join(', ')}</li>
+      </StyledMetaList>
 
-    <StyledOverview>{show.overview}</StyledOverview>
-  </StyledMetadata>
-)
+      {hasTrailer && (
+        <StyledTrailerButton type="button" onClick={onPlayTrailer}>
+          {t('common:watchTrailer')}
+        </StyledTrailerButton>
+      )}
+
+      <StyledOverview>{show.overview}</StyledOverview>
+    </StyledMetadata>
+  )
+}

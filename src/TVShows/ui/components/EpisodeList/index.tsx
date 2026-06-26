@@ -1,5 +1,7 @@
-import { ErrorBoundary, PosterImage, SectionState } from '@/Common'
+import { useTranslation } from 'react-i18next'
+import { ErrorBoundary, formatLocaleDate, PosterImage, SectionState } from '@/Common'
 import type { AsyncStatus, Episode } from '@/Common'
+import { LANGUAGE_TO_INTL, usePreferencesSnapshot } from '@/Preferences'
 import {
   StyledEpisodeCard,
   StyledEpisodeHeader,
@@ -8,6 +10,7 @@ import {
   StyledEpisodeOverview,
   StyledEpisodeTitle,
   StyledHeading,
+  StyledNotFoundText,
   StyledSection,
   StyledCheckbox,
 } from './StyledComponents'
@@ -20,15 +23,6 @@ interface EpisodeListProps {
   isNotFound?: boolean
 }
 
-const formatAirDate = (date: string): string => {
-  if (!date) return 'TBA'
-  return new Date(date).toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
-}
-
 const EpisodeListContent = ({
   seasonName,
   episodes,
@@ -36,23 +30,27 @@ const EpisodeListContent = ({
   error,
   isNotFound,
 }: EpisodeListProps) => {
+  const { t } = useTranslation(['tvShows', 'common'])
+  const { language } = usePreferencesSnapshot()
+  const locale = LANGUAGE_TO_INTL[language]
+
   if (isNotFound) {
     return (
       <StyledSection>
         <StyledHeading>{seasonName}</StyledHeading>
-        <p style={{ color: '#94a3b8' }}>Season not found.</p>
+        <StyledNotFoundText>{t('tvShows:seasons.notFound')}</StyledNotFoundText>
       </StyledSection>
     )
   }
 
   return (
-    <StyledSection aria-label={`${seasonName} episodes`}>
+    <StyledSection aria-label={t('tvShows:episodes.ariaLabel', { seasonName })}>
       <StyledHeading>{seasonName}</StyledHeading>
       <SectionState
         status={status}
         error={error}
         isEmpty={episodes.length === 0}
-        emptyMessage="No episodes available."
+        emptyMessage={t('tvShows:episodes.empty')}
       >
         <StyledEpisodeList>
           {episodes.map((episode) => (
@@ -67,16 +65,20 @@ const EpisodeListContent = ({
                   <StyledCheckbox
                     type="checkbox"
                     disabled
-                    aria-label={`Mark episode ${episode.episode_number} as watched (coming soon)`}
-                    title="Episode tracking — coming in Milestone 6"
+                    aria-label={t('common:markEpisodeWatchedSoon', {
+                      number: episode.episode_number,
+                    })}
+                    title={t('common:episodeTrackingSoon')}
                   />
                   <div>
                     <StyledEpisodeTitle>
                       {episode.episode_number}. {episode.name}
                     </StyledEpisodeTitle>
                     <StyledEpisodeMeta>
-                      {formatAirDate(episode.air_date)}
-                      {episode.runtime ? ` · ${episode.runtime} min` : ''}
+                      {formatLocaleDate(episode.air_date, locale) || t('common:tba')}
+                      {episode.runtime
+                        ? ` · ${t('common:runtimeMinutes', { count: episode.runtime })}`
+                        : ''}
                       {` · ★ ${episode.vote_average.toFixed(1)}`}
                     </StyledEpisodeMeta>
                   </div>

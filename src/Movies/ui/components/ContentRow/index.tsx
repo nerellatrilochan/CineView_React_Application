@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import {
   buildMovieDetailPath,
   ErrorBoundary,
@@ -20,29 +21,33 @@ const ContentRowContent = ({
   items,
   status,
   error,
-}: ContentRowProps) => (
-  <StyledSection aria-label={title}>
-    <StyledHeading>{title}</StyledHeading>
-    <SectionState
-      status={status}
-      error={error}
-      isEmpty={items.length === 0}
-      emptyMessage={`No ${title.toLowerCase()} to display.`}
-    >
-      <HorizontalScrollRow>
-        {items.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            title={movie.title}
-            posterPath={movie.poster_path}
-            rating={movie.vote_average}
-            to={buildMovieDetailPath(movie.id)}
-          />
-        ))}
-      </HorizontalScrollRow>
-    </SectionState>
-  </StyledSection>
-)
+}: ContentRowProps) => {
+  const { t } = useTranslation('movies')
+
+  return (
+    <StyledSection aria-label={title}>
+      <StyledHeading>{title}</StyledHeading>
+      <SectionState
+        status={status}
+        error={error}
+        isEmpty={items.length === 0}
+        emptyMessage={t('rows.empty', { title: title.toLowerCase() })}
+      >
+        <HorizontalScrollRow>
+          {items.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              posterPath={movie.poster_path}
+              rating={movie.vote_average}
+              to={buildMovieDetailPath(movie.id)}
+            />
+          ))}
+        </HorizontalScrollRow>
+      </SectionState>
+    </StyledSection>
+  )
+}
 
 export const ContentRow = (props: ContentRowProps) => (
   <ErrorBoundary>

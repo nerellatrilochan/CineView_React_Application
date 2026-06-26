@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { SectionState, TextInput } from '@/Common'
 import { RecentSearches } from '../components/RecentSearches'
 import { SearchResultGroup } from '../components/SearchResultGroup'
@@ -15,10 +16,11 @@ const StyledHeader = styled.div`
 const StyledTitle = styled.h1`
   margin: 0 0 1rem;
   font-size: 1.75rem;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
 `
 
 export const SearchPage = () => {
+  const { t } = useTranslation('search')
   const {
     query,
     setQuery,
@@ -39,12 +41,12 @@ export const SearchPage = () => {
   return (
     <StyledPage>
       <StyledHeader>
-        <StyledTitle>Search</StyledTitle>
+        <StyledTitle>{t('title')}</StyledTitle>
         <TextInput
           id="search-query"
-          label="Search"
+          label={t('label')}
           value={query}
-          placeholder="Search movies, TV shows, people…"
+          placeholder={t('placeholder')}
           onChange={setQuery}
         />
       </StyledHeader>
@@ -62,11 +64,11 @@ export const SearchPage = () => {
           status={status}
           error={error}
           isEmpty={status === 'success' && !hasResults}
-          emptyMessage="No results found for your search."
+          emptyMessage={t('empty')}
         >
-          <SearchResultGroup title="Movies" items={groupedResults.movies} />
-          <SearchResultGroup title="TV Shows" items={groupedResults.tvShows} />
-          <SearchResultGroup title="People" items={groupedResults.people} />
+          <SearchResultGroup title={t('groups.movies')} items={groupedResults.movies} />
+          <SearchResultGroup title={t('groups.tvShows')} items={groupedResults.tvShows} />
+          <SearchResultGroup title={t('groups.people')} items={groupedResults.people} />
         </SectionState>
       )}
     </StyledPage>

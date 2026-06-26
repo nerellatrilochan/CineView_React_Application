@@ -17,7 +17,7 @@ export const StyledScrollRow = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #334155;
+    background-color: var(--cv-border);
     border-radius: 9999px;
   }
 `

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const StyledOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background-color: rgba(2, 6, 23, 0.85);
+  background-color: color-mix(in srgb, var(--cv-bg-deep) 85%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,9 +14,9 @@ export const StyledOverlay = styled.div`
 export const StyledDialog = styled.div`
   position: relative;
   width: min(56rem, 100%);
-  background-color: #0f172a;
+  background-color: var(--cv-bg-primary);
   border-radius: 0.75rem;
-  border: 1px solid #334155;
+  border: 1px solid var(--cv-border);
   overflow: hidden;
 `
 
@@ -29,13 +29,13 @@ export const StyledCloseButton = styled.button`
   height: 2rem;
   border: none;
   border-radius: 9999px;
-  background-color: rgba(15, 23, 42, 0.9);
-  color: #f8fafc;
+  background-color: color-mix(in srgb, var(--cv-bg-primary) 90%, transparent);
+  color: var(--cv-text-primary);
   cursor: pointer;
   font-size: 1.25rem;
   line-height: 1;
 
   &:hover {
-    background-color: #1e293b;
+    background-color: var(--cv-bg-secondary);
   }
 `

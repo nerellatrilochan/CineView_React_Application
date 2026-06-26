@@ -19,6 +19,8 @@ export { TmdbNotFoundError } from './data/services/TmdbService/TmdbNotFoundError
 export { buildMovieDetailPath, buildTVShowDetailPath, buildSeasonDetailPath } from './core/utils/RouteBuilder.utils'
 export { getPosterUrl, getBackdropUrl, getProfileUrl } from './core/utils/TmdbImage.utils'
 export type { AsyncStatus } from './core/types/Status.types'
+export { formatLocaleDate } from './core/utils/FormatDate.utils'
+
 export type {
   MovieSummary,
   MovieDetail,

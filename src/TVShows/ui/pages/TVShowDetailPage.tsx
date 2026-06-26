@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Outlet, useParams } from 'react-router-dom'
 import {
   ErrorBoundary,
@@ -18,7 +19,7 @@ const StyledPage = styled.div`
 
 const StyledBackdrop = styled.div<{ $url: string | null }>`
   height: 16rem;
-  background-color: #020617;
+  background-color: var(--cv-bg-deep);
   background-image: ${({ $url }) => ($url ? `url(${$url})` : 'none')};
   background-size: cover;
   background-position: center;
@@ -27,19 +28,20 @@ const StyledBackdrop = styled.div<{ $url: string | null }>`
 const StyledNotFound = styled.div`
   padding: 4rem 1.5rem;
   text-align: center;
-  color: #94a3b8;
+  color: var(--cv-text-muted);
 
   h1 {
-    color: #f8fafc;
+    color: var(--cv-text-primary);
     margin-bottom: 0.5rem;
   }
 `
 
 const StyledOutlet = styled.div`
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid var(--cv-border-subtle);
 `
 
 export const TVShowDetailPage = () => {
+  const { t } = useTranslation('tvShows')
   const { showId } = useParams<{ showId: string }>()
   const parsedId = Number(showId)
   const isValidId = Number.isFinite(parsedId) && parsedId > 0
@@ -61,8 +63,8 @@ export const TVShowDetailPage = () => {
   if (!isValidId || isNotFound) {
     return (
       <StyledNotFound>
-        <h1>TV Show Not Found</h1>
-        <p>The show you are looking for does not exist or is unavailable.</p>
+        <h1>{t('detail.notFoundTitle')}</h1>
+        <p>{t('detail.notFoundDescription')}</p>
       </StyledNotFound>
     )
   }

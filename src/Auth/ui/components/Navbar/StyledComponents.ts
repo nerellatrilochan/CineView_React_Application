@@ -6,20 +6,20 @@ export const StyledNavbar = styled.header`
   align-items: center;
   gap: 1.5rem;
   padding: 0.75rem 1.5rem;
-  background-color: #020617;
-  border-bottom: 1px solid #1e293b;
+  background-color: var(--cv-navbar-bg);
+  border-bottom: 1px solid var(--cv-border-subtle);
   flex-wrap: wrap;
 `
 
 export const StyledLogo = styled(NavLink)`
   font-size: 1.25rem;
   font-weight: 700;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
   text-decoration: none;
   white-space: nowrap;
 
   &:hover {
-    color: #38bdf8;
+    color: var(--cv-accent);
   }
 `
 
@@ -32,19 +32,19 @@ export const StyledNavLinks = styled.nav`
 export const StyledNavItem = styled(NavLink)`
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
-  color: #94a3b8;
+  color: var(--cv-text-muted);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
 
   &:hover {
-    color: #e2e8f0;
-    background-color: #1e293b;
+    color: var(--cv-text-secondary);
+    background-color: var(--cv-bg-secondary);
   }
 
   &.active {
-    color: #38bdf8;
-    background-color: #0f172a;
+    color: var(--cv-accent);
+    background-color: var(--cv-bg-primary);
   }
 `
 
@@ -58,18 +58,18 @@ export const StyledSearchForm = styled.form`
 export const StyledSearchInput = styled.input`
   width: 100%;
   padding: 0.5rem 0.875rem;
-  border: 1px solid #334155;
+  border: 1px solid var(--cv-border);
   border-radius: 0.5rem;
-  background-color: #0f172a;
-  color: #f8fafc;
+  background-color: var(--cv-input-bg);
+  color: var(--cv-text-primary);
   font-size: 0.875rem;
 
   &::placeholder {
-    color: #64748b;
+    color: var(--cv-text-placeholder);
   }
 
   &:focus {
-    outline: 2px solid #38bdf8;
+    outline: 2px solid var(--cv-accent);
     outline-offset: 1px;
   }
 `
@@ -81,21 +81,32 @@ export const StyledActions = styled.div`
   margin-left: auto;
 `
 
-export const StyledLanguagePlaceholder = styled.div`
+export const StyledLanguageLink = styled(NavLink)`
   padding: 0.375rem 0.75rem;
-  border: 1px solid #334155;
+  border: 1px solid var(--cv-border);
   border-radius: 0.375rem;
-  color: #94a3b8;
+  color: var(--cv-text-muted);
   font-size: 0.75rem;
-  background-color: #0f172a;
+  background-color: var(--cv-input-bg);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--cv-accent);
+    border-color: var(--cv-accent);
+  }
+
+  &.active {
+    color: var(--cv-accent);
+    border-color: var(--cv-accent);
+  }
 `
 
 export const StyledAvatar = styled.div`
   width: 2rem;
   height: 2rem;
   border-radius: 9999px;
-  background-color: #0369a1;
-  color: #f8fafc;
+  background-color: var(--cv-avatar-bg);
+  color: var(--cv-text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,14 +117,14 @@ export const StyledAvatar = styled.div`
 
 export const StyledLogoutButton = styled.button`
   padding: 0.375rem 0.75rem;
-  border: 1px solid #334155;
+  border: 1px solid var(--cv-border);
   border-radius: 0.375rem;
   background-color: transparent;
-  color: #e2e8f0;
+  color: var(--cv-text-secondary);
   font-size: 0.875rem;
   cursor: pointer;
 
   &:hover {
-    background-color: #1e293b;
+    background-color: var(--cv-bg-secondary);
   }
 `

@@ -1,5 +1,62 @@
 @import 'tailwindcss';
 
+:root,
+[data-theme='light'] {
+  --cv-bg-deep: #f1f5f9;
+  --cv-bg-primary: #f8fafc;
+  --cv-bg-secondary: #ffffff;
+  --cv-bg-tertiary: #e2e8f0;
+  --cv-bg-elevated: #ffffff;
+  --cv-border: #cbd5e1;
+  --cv-border-subtle: #e2e8f0;
+  --cv-text-primary: #0f172a;
+  --cv-text-secondary: #334155;
+  --cv-text-muted: #64748b;
+  --cv-text-placeholder: #94a3b8;
+  --cv-accent: #0284c7;
+  --cv-accent-hover: #0369a1;
+  --cv-danger: #dc2626;
+  --cv-danger-bg: #fef2f2;
+  --cv-danger-text: #b91c1c;
+  --cv-avatar-bg: #0284c7;
+  --cv-input-bg: #ffffff;
+  --cv-navbar-bg: #ffffff;
+  --cv-gradient-start: #f8fafc;
+  --cv-gradient-mid: #e2e8f0;
+  --cv-gradient-end: #f8fafc;
+  --cv-rating-bg: #0f172a;
+  --cv-rating-text: #f8fafc;
+}
+
+[data-theme='dark'] {
+  --cv-bg-deep: #020617;
+  --cv-bg-primary: #0f172a;
+  --cv-bg-secondary: #1e293b;
+  --cv-bg-tertiary: #334155;
+  --cv-bg-elevated: #0f172a;
+  --cv-border: #334155;
+  --cv-border-subtle: #1e293b;
+  --cv-text-primary: #f8fafc;
+  --cv-text-secondary: #e2e8f0;
+  --cv-text-muted: #94a3b8;
+  --cv-text-placeholder: #64748b;
+  --cv-accent: #38bdf8;
+  --cv-accent-hover: #0ea5e9;
+  --cv-danger: #f87171;
+  --cv-danger-bg: #450a0a;
+  --cv-danger-text: #fecaca;
+  --cv-avatar-bg: #0369a1;
+  --cv-input-bg: #0f172a;
+  --cv-navbar-bg: #020617;
+  --cv-gradient-start: #0f172a;
+  --cv-gradient-mid: #1e293b;
+  --cv-gradient-end: #0f172a;
+  --cv-rating-bg: #f8fafc;
+  --cv-rating-text: #0f172a;
+}
+
 body {
   margin: 0;
+  background-color: var(--cv-bg-primary);
+  color: var(--cv-text-primary);
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { AsyncStatus } from '../../core/types/Status.types'
 
 interface AsyncResourceState<T> {
@@ -17,22 +17,53 @@ export const useAsyncResource = <T>(
     error: null,
   })
 
-  const load = useCallback(async () => {
+  const fetcherRef = useRef(fetcher)
+
+  useEffect(() => {
+    fetcherRef.current = fetcher
+  }, [fetcher])
+
+  const depsKey = JSON.stringify(deps)
+
+  const refetch = useCallback(async () => {
     setState((prev) => ({ ...prev, status: 'loading', error: null }))
 
     try {
-      const data = await fetcher()
+      const data = await fetcherRef.current()
       setState({ data, status: 'success', error: null })
     } catch (error) {
       const message =
         error instanceof Error ? error.message : 'Something went wrong'
       setState({ data: null, status: 'error', error: message })
     }
-  }, deps)
+  }, [])
 
   useEffect(() => {
-    void load()
-  }, [load])
+    let cancelled = false
 
-  return { ...state, refetch: load }
+    const load = async () => {
+      await Promise.resolve()
+      if (cancelled) return
+      setState((prev) => ({ ...prev, status: 'loading', error: null }))
+
+      try {
+        const data = await fetcherRef.current()
+        if (cancelled) return
+        setState({ data, status: 'success', error: null })
+      } catch (error) {
+        if (cancelled) return
+        const message =
+          error instanceof Error ? error.message : 'Something went wrong'
+        setState({ data: null, status: 'error', error: message })
+      }
+    }
+
+    void load()
+
+    return () => {
+      cancelled = true
+    }
+  }, [depsKey])
+
+  return { ...state, refetch }
 }

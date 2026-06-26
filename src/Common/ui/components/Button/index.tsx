@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { StyledButton } from './StyledComponents'
 
 interface ButtonProps {
@@ -13,8 +14,12 @@ export const Button = ({
   type = 'button',
   isLoading = false,
   onClick,
-}: ButtonProps) => (
-  <StyledButton type={type} disabled={isLoading} onClick={onClick}>
-    {isLoading ? 'Please wait…' : children}
-  </StyledButton>
-)
+}: ButtonProps) => {
+  const { t } = useTranslation('common')
+
+  return (
+    <StyledButton type={type} disabled={isLoading} onClick={onClick}>
+      {isLoading ? t('pleaseWait') : children}
+    </StyledButton>
+  )
+}

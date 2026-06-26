@@ -1,9 +1,6 @@
 import { useState } from 'react'
-import {
-  ErrorBoundary,
-  SectionState,
-  TrailerModal,
-} from '@/Common'
+import { useTranslation } from 'react-i18next'
+import { ErrorBoundary, SectionState, TrailerModal } from '@/Common'
 import { ContentRow } from '../components/ContentRow'
 import { GenreFilter } from '../components/GenreFilter'
 import { HeroBanner } from '../components/HeroBanner'
@@ -27,6 +24,7 @@ const StyledVisuallyHiddenTitle = styled.h1`
 `
 
 export const HomePage = () => {
+  const { t } = useTranslation('movies')
   const {
     genres,
     genresStatus,
@@ -42,7 +40,7 @@ export const HomePage = () => {
 
   return (
     <StyledPage>
-      <StyledVisuallyHiddenTitle>Home</StyledVisuallyHiddenTitle>
+      <StyledVisuallyHiddenTitle>{t('home.title')}</StyledVisuallyHiddenTitle>
 
       <ErrorBoundary>
         <SectionState status={heroStatus} error={heroError} isEmpty={!heroMovie}>
@@ -64,10 +62,10 @@ export const HomePage = () => {
         />
       )}
 
-      <ContentRow title="Trending" {...rows.trending} />
-      <ContentRow title="Popular" {...rows.popular} />
-      <ContentRow title="Top Rated" {...rows.topRated} />
-      <ContentRow title="Upcoming" {...rows.upcoming} />
+      <ContentRow title={t('rows.trending')} {...rows.trending} />
+      <ContentRow title={t('rows.popular')} {...rows.popular} />
+      <ContentRow title={t('rows.topRated')} {...rows.topRated} />
+      <ContentRow title={t('rows.upcoming')} {...rows.upcoming} />
 
       {heroMovie && (
         <TrailerModal

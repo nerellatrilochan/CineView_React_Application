@@ -1,5 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import { PlaceholderPage } from '@/Common'
 
-export const MyListsPage = () => (
-  <PlaceholderPage title="My Lists" description="Custom collections — coming in Milestone 6." />
-)
+export const MyListsPage = () => {
+  const { t } = useTranslation('collection')
+
+  return (
+    <PlaceholderPage
+      title={t('myLists.title')}
+      description={t('myLists.description')}
+    />
+  )
+}

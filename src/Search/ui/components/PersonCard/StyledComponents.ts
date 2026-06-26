@@ -8,12 +8,12 @@ export const StyledCard = styled.article`
 export const StyledName = styled.p`
   margin: 0.5rem 0 0;
   font-size: 0.8125rem;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
   font-weight: 600;
 `
 
 export const StyledDepartment = styled.p`
   margin: 0.125rem 0 0;
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: var(--cv-text-muted);
 `

@@ -15,18 +15,23 @@ export const StyledCard = styled.section`
   justify-content: center;
   min-height: 100vh;
   padding: 2rem;
-  background: linear-gradient(160deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background: linear-gradient(
+    160deg,
+    var(--cv-gradient-start) 0%,
+    var(--cv-gradient-mid) 50%,
+    var(--cv-gradient-end) 100%
+  );
 `
 
 export const StyledTitle = styled.h1`
   font-size: 2rem;
   font-weight: 700;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
   margin: 0 0 0.5rem;
 `
 
 export const StyledSubtitle = styled.p`
-  color: #94a3b8;
+  color: var(--cv-text-muted);
   margin: 0 0 2rem;
   text-align: center;
 `
@@ -36,8 +41,8 @@ export const StyledAuthError = styled.p`
   margin: 0;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
-  background-color: #450a0a;
-  color: #fecaca;
+  background-color: var(--cv-danger-bg);
+  color: var(--cv-danger-text);
   font-size: 0.875rem;
   text-align: center;
 `
@@ -60,14 +65,14 @@ export const StyledToggleButton = styled.button`
   flex-shrink: 0;
   height: 2.75rem;
   padding: 0 0.875rem;
-  border: 1px solid #334155;
+  border: 1px solid var(--cv-border);
   border-radius: 0.5rem;
-  background-color: #1e293b;
-  color: #e2e8f0;
+  background-color: var(--cv-bg-secondary);
+  color: var(--cv-text-secondary);
   font-size: 0.875rem;
   cursor: pointer;
 
   &:hover {
-    background-color: #334155;
+    background-color: var(--cv-bg-tertiary);
   }
 `

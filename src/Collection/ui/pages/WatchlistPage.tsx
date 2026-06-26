@@ -1,5 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import { PlaceholderPage } from '@/Common'
 
-export const WatchlistPage = () => (
-  <PlaceholderPage title="Watchlist" description="Personal watchlist — coming in Milestone 5." />
-)
+export const WatchlistPage = () => {
+  const { t } = useTranslation('collection')
+
+  return (
+    <PlaceholderPage
+      title={t('watchlist.title')}
+      description={t('watchlist.description')}
+    />
+  )
+}

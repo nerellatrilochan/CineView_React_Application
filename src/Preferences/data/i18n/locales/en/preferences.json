@@ -1,0 +1,37 @@
+{
+    "title": "Settings",
+    "subtitle": "Customise your language, region, and appearance.",
+    "language": {
+      "label": "Language",
+      "description": "Updates UI text and TMDB content language."
+    },
+    "region": {
+      "label": "Region",
+      "description": "Affects regional availability and release data from TMDB."
+    },
+    "theme": {
+      "label": "Theme",
+      "description": "Switch between light and dark mode.",
+      "light": "Light",
+      "dark": "Dark",
+      "toggleToLight": "Switch to light theme",
+      "toggleToDark": "Switch to dark theme"
+    },
+    "logout": {
+      "label": "Sign out",
+      "description": "End your current session on this device.",
+      "action": "Logout"
+    },
+    "languages": {
+      "en": "English",
+      "es": "Spanish"
+    },
+    "regions": {
+      "US": "United States",
+      "GB": "United Kingdom",
+      "IN": "India",
+      "ES": "Spain",
+      "FR": "France",
+      "DE": "Germany"
+    }
+  }

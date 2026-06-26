@@ -1,11 +1,13 @@
 import { useState, type SubmitEventHandler } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/Common'
+import { usePreferencesSnapshot } from '@/Preferences'
 import { useAuthController } from '../../controllers/useAuthController'
 import {
   StyledActions,
   StyledAvatar,
-  StyledLanguagePlaceholder,
+  StyledLanguageLink,
   StyledLogo,
   StyledLogoutButton,
   StyledNavbar,
@@ -16,17 +18,19 @@ import {
 } from './StyledComponents'
 
 const NAV_ITEMS = [
-  { label: 'Home', to: ROUTES.HOME, end: true },
-  { label: 'Watchlist', to: ROUTES.WATCHLIST, end: false },
-  { label: 'My Lists', to: ROUTES.LISTS, end: false },
+  { labelKey: 'auth:nav.home', to: ROUTES.HOME, end: true },
+  { labelKey: 'auth:nav.watchlist', to: ROUTES.WATCHLIST, end: false },
+  { labelKey: 'auth:nav.myLists', to: ROUTES.LISTS, end: false },
 ] as const
 
 const getInitials = (username: string): string =>
   username.slice(0, 2).toUpperCase()
 
 export const Navbar = () => {
+  const { t } = useTranslation(['auth', 'common'])
   const navigate = useNavigate()
   const { session, logout } = useAuthController()
+  const { language } = usePreferencesSnapshot()
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleSearchSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
@@ -46,12 +50,12 @@ export const Navbar = () => {
 
   return (
     <StyledNavbar>
-      <StyledLogo to={ROUTES.HOME}>CineView</StyledLogo>
+      <StyledLogo to={ROUTES.HOME}>{t('common:appName')}</StyledLogo>
 
-      <StyledNavLinks aria-label="Main navigation">
-        {NAV_ITEMS.map(({ label, to, end }) => (
+      <StyledNavLinks aria-label={t('common:mainNavigation')}>
+        {NAV_ITEMS.map(({ labelKey, to, end }) => (
           <StyledNavItem key={to} to={to} end={end}>
-            {label}
+            {t(labelKey)}
           </StyledNavItem>
         ))}
       </StyledNavLinks>
@@ -59,24 +63,26 @@ export const Navbar = () => {
       <StyledSearchForm onSubmit={handleSearchSubmit} role="search">
         <StyledSearchInput
           type="search"
-          placeholder="Search movies, TV shows, people…"
+          placeholder={t('auth:nav.searchPlaceholder')}
           value={searchQuery}
-          aria-label="Global search"
+          aria-label={t('common:globalSearch')}
           onChange={(event) => setSearchQuery(event.target.value)}
         />
       </StyledSearchForm>
 
       <StyledActions>
-        <StyledLanguagePlaceholder aria-hidden>EN</StyledLanguagePlaceholder>
+        <StyledLanguageLink to={ROUTES.SETTINGS} aria-label={t('preferences:title')}>
+          {language.toUpperCase()}
+        </StyledLanguageLink>
 
         {session && (
-          <StyledAvatar aria-label={`Signed in as ${session.username}`}>
+          <StyledAvatar aria-label={t('common:signedInAs', { username: session.username })}>
             {getInitials(session.username)}
           </StyledAvatar>
         )}
 
         <StyledLogoutButton type="button" onClick={handleLogout}>
-          Logout
+          {t('common:logout')}
         </StyledLogoutButton>
       </StyledActions>
     </StyledNavbar>

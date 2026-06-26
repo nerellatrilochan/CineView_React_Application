@@ -8,5 +8,5 @@ export const StyledHeading = styled.h2`
   margin: 0 0 1rem;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
 `

@@ -8,11 +8,11 @@ export const StyledSectionState = styled.div`
   gap: 0.75rem;
   min-height: 8rem;
   padding: 1.5rem;
-  color: #94a3b8;
+  color: var(--cv-text-muted);
   text-align: center;
 `
 
 export const StyledErrorText = styled.p`
-  color: #f87171;
+  color: var(--cv-danger);
   margin: 0;
 `

@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { StyledCloseButton, StyledDialog, StyledOverlay } from './StyledComponents'
 
@@ -10,6 +11,8 @@ interface ModalProps {
 }
 
 export const Modal = ({ isOpen, onClose, children, ariaLabel }: ModalProps) => {
+  const { t } = useTranslation('common')
+
   useEffect(() => {
     if (!isOpen) return
 
@@ -31,7 +34,7 @@ export const Modal = ({ isOpen, onClose, children, ariaLabel }: ModalProps) => {
         aria-label={ariaLabel}
         onClick={(event) => event.stopPropagation()}
       >
-        <StyledCloseButton type="button" aria-label="Close" onClick={onClose}>
+        <StyledCloseButton type="button" aria-label={t('close')} onClick={onClose}>
           ×
         </StyledCloseButton>
         {children}

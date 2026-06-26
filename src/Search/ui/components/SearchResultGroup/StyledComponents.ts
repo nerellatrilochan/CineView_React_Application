@@ -7,5 +7,5 @@ export const StyledGroup = styled.section`
 export const StyledHeading = styled.h2`
   margin: 0 0 1rem;
   font-size: 1.125rem;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
 `

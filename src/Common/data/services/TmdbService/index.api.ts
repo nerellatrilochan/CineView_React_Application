@@ -23,11 +23,22 @@ import type {
 import type { TmdbService } from './index'
 import { TmdbNotFoundError } from './TmdbNotFoundError'
 
+type TmdbLocaleProvider = () => { language: string; region: string }
+
 export class TmdbAPI implements TmdbService {
+  private localeProvider: TmdbLocaleProvider = () => ({
+    language: 'en-US',
+    region: 'US',
+  })
+
   constructor(
     private readonly baseUrl: string = TMDB_CONFIG.BASE_URL,
     private readonly apiKey: string = TMDB_CONFIG.API_KEY,
   ) {}
+
+  setLocaleProvider(provider: TmdbLocaleProvider): void {
+    this.localeProvider = provider
+  }
 
   private async request<T>(
     path: string,
@@ -38,8 +49,11 @@ export class TmdbAPI implements TmdbService {
       throw new Error('VITE_TMDB_API_KEY is not configured')
     }
 
+    const { language, region } = this.localeProvider()
     const url = new URL(`${this.baseUrl}${path}`)
     url.searchParams.set('api_key', this.apiKey)
+    url.searchParams.set('language', language)
+    url.searchParams.set('region', region)
 
     Object.entries(params).forEach(([key, value]) => {
       url.searchParams.set(key, value)

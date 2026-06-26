@@ -1,0 +1,37 @@
+{
+    "title": "Ajustes",
+    "subtitle": "Personaliza idioma, región y apariencia.",
+    "language": {
+      "label": "Idioma",
+      "description": "Actualiza los textos de la interfaz y el idioma de TMDB."
+    },
+    "region": {
+      "label": "Región",
+      "description": "Afecta la disponibilidad regional y los datos de estreno de TMDB."
+    },
+    "theme": {
+      "label": "Tema",
+      "description": "Cambia entre modo claro y oscuro.",
+      "light": "Claro",
+      "dark": "Oscuro",
+      "toggleToLight": "Cambiar a tema claro",
+      "toggleToDark": "Cambiar a tema oscuro"
+    },
+    "logout": {
+      "label": "Cerrar sesión",
+      "description": "Finaliza tu sesión en este dispositivo.",
+      "action": "Cerrar sesión"
+    },
+    "languages": {
+      "en": "Inglés",
+      "es": "Español"
+    },
+    "regions": {
+      "US": "Estados Unidos",
+      "GB": "Reino Unido",
+      "IN": "India",
+      "ES": "España",
+      "FR": "Francia",
+      "DE": "Alemania"
+    }
+  }

@@ -1,0 +1,19 @@
+{
+    "title": "Search",
+    "label": "Search",
+    "placeholder": "Search movies, TV shows, people…",
+    "empty": "No results found for your search.",
+    "groups": {
+      "movies": "Movies",
+      "tvShows": "TV Shows",
+      "people": "People"
+    },
+    "recent": {
+      "ariaLabel": "Recent searches",
+      "title": "Recent Searches",
+      "clear": "Clear"
+    },
+    "errors": {
+      "searchFailed": "Search failed"
+    }
+  }

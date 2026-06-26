@@ -1,0 +1,19 @@
+{
+    "title": "Buscar",
+    "label": "Buscar",
+    "placeholder": "Buscar películas, series, personas…",
+    "empty": "No se encontraron resultados para tu búsqueda.",
+    "groups": {
+      "movies": "Películas",
+      "tvShows": "Series",
+      "people": "Personas"
+    },
+    "recent": {
+      "ariaLabel": "Búsquedas recientes",
+      "title": "Búsquedas recientes",
+      "clear": "Borrar"
+    },
+    "errors": {
+      "searchFailed": "Error en la búsqueda"
+    }
+  }

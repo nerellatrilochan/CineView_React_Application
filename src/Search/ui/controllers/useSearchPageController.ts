@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
 import type { AsyncStatus, SearchResultItem } from '@/Common'
 import { tmdbService, useDebounce } from '@/Common'
+import { usePreferencesSnapshot } from '@/Preferences'
 import { SEARCH_DEBOUNCE_MS } from '../../core/constants/Search.constants'
 import { RecentSearchService } from '../../data/services/RecentSearchService'
 
 const recentSearchService = new RecentSearchService()
 
 export const useSearchPageController = () => {
+  const { t } = useTranslation('search')
+  const { tmdbLanguage, region } = usePreferencesSnapshot()
+
   const [searchParams, setSearchParams] = useSearchParams()
   const queryFromUrl = searchParams.get('q') ?? ''
   const [query, setQuery] = useState(queryFromUrl)
@@ -21,36 +26,53 @@ export const useSearchPageController = () => {
   )
 
   useEffect(() => {
-    setQuery(queryFromUrl)
+    void Promise.resolve().then(() => {
+      setQuery(queryFromUrl)
+    })
   }, [queryFromUrl])
 
   useEffect(() => {
+    let cancelled = false
     const trimmed = debouncedQuery.trim()
+
     if (!trimmed) {
-      setResults([])
-      setStatus('idle')
-      setError(null)
-      return
+      void Promise.resolve().then(() => {
+        if (cancelled) return
+        setResults([])
+        setStatus('idle')
+        setError(null)
+      })
+      return () => {
+        cancelled = true
+      }
     }
 
     const search = async () => {
+      await Promise.resolve()
+      if (cancelled) return
       setStatus('loading')
       setError(null)
 
       try {
         const response = await tmdbService.searchMulti(trimmed)
+        if (cancelled) return
         setResults(response.results)
         setStatus('success')
         setRecentSearches(recentSearchService.addSearch(trimmed))
         setSearchParams({ q: trimmed }, { replace: true })
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Search failed')
+        if (cancelled) return
+        setError(err instanceof Error ? err.message : t('search:errors.searchFailed'))
         setStatus('error')
       }
     }
 
     void search()
-  }, [debouncedQuery, setSearchParams])
+
+    return () => {
+      cancelled = true
+    }
+  }, [debouncedQuery, setSearchParams, tmdbLanguage, region, t])
 
   const groupedResults = useMemo(
     () => ({

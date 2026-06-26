@@ -8,7 +8,7 @@ export const StyledSection = styled.nav`
 export const StyledHeading = styled.h2`
   margin: 0 0 0.75rem;
   font-size: 1.125rem;
-  color: #f8fafc;
+  color: var(--cv-text-primary);
 `
 
 export const StyledSeasonTabs = styled.div`
@@ -22,19 +22,19 @@ export const StyledSeasonLink = styled(NavLink)`
   flex-shrink: 0;
   padding: 0.5rem 0.875rem;
   border-radius: 0.5rem;
-  border: 1px solid #334155;
-  background-color: #1e293b;
-  color: #cbd5e1;
+  border: 1px solid var(--cv-border);
+  background-color: var(--cv-bg-secondary);
+  color: var(--cv-text-secondary);
   text-decoration: none;
   font-size: 0.875rem;
 
   &.active {
-    border-color: #38bdf8;
-    background-color: #0c4a6e;
-    color: #e0f2fe;
+    border-color: var(--cv-accent);
+    background-color: var(--cv-bg-tertiary);
+    color: var(--cv-text-primary);
   }
 
   &:hover {
-    border-color: #38bdf8;
+    border-color: var(--cv-accent);
   }
 `

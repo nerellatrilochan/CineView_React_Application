@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { EpisodeList } from '../components/EpisodeList'
 import { useSeasonDetailController } from '../controllers/useSeasonDetailController'
 
 export const SeasonDetailPage = () => {
+  const { t } = useTranslation('tvShows')
   const { showId, seasonNumber } = useParams<{
     showId: string
     seasonNumber: string
@@ -23,7 +25,10 @@ export const SeasonDetailPage = () => {
 
   return (
     <EpisodeList
-      seasonName={season?.name ?? `Season ${seasonNumber ?? ''}`}
+      seasonName={
+        season?.name ??
+        t('seasons.fallbackName', { number: seasonNumber ?? '' })
+      }
       episodes={season?.episodes ?? []}
       status={status}
       error={error}

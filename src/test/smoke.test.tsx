@@ -2,15 +2,19 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 import { describe, expect, it, beforeEach } from 'vitest'
 import { AuthProvider, SESSION_STORAGE_KEY } from '@/Auth'
+import { PreferencesProvider } from '@/Preferences'
+import '@/Preferences/data/i18n'
 import { routes } from '@/router'
 
 const renderApp = (initialEntry: string) => {
   const memoryRouter = createMemoryRouter(routes, { initialEntries: [initialEntry] })
 
   return render(
-    <AuthProvider>
-      <RouterProvider router={memoryRouter} />
-    </AuthProvider>,
+    <PreferencesProvider>
+      <AuthProvider>
+        <RouterProvider router={memoryRouter} />
+      </AuthProvider>
+    </PreferencesProvider>,
   )
 }
 
@@ -18,6 +22,7 @@ describe('CineView smoke test', () => {
   beforeEach(() => {
     cleanup()
     sessionStorage.clear()
+    localStorage.clear()
   })
 
   it('redirects unauthenticated users from home to login', async () => {
