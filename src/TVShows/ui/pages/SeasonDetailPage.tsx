@@ -1,13 +1,33 @@
 import { useParams } from 'react-router-dom'
-import { PlaceholderPage } from '@/Common'
+import { EpisodeList } from '../components/EpisodeList'
+import { useSeasonDetailController } from '../controllers/useSeasonDetailController'
 
 export const SeasonDetailPage = () => {
-  const { showId, seasonNumber } = useParams<{ showId: string; seasonNumber: string }>()
+  const { showId, seasonNumber } = useParams<{
+    showId: string
+    seasonNumber: string
+  }>()
+
+  const parsedShowId = Number(showId)
+  const parsedSeasonNumber = Number(seasonNumber)
+  const isValid =
+    Number.isFinite(parsedShowId) &&
+    parsedShowId > 0 &&
+    Number.isFinite(parsedSeasonNumber) &&
+    parsedSeasonNumber >= 0
+
+  const { season, status, isNotFound, error } = useSeasonDetailController(
+    isValid ? parsedShowId : 0,
+    isValid ? parsedSeasonNumber : 0,
+  )
 
   return (
-    <PlaceholderPage
-      title="Season Detail"
-      description={`Show ${showId ?? '?'} — Season ${seasonNumber ?? '?'} — coming in Milestone 3.`}
+    <EpisodeList
+      seasonName={season?.name ?? `Season ${seasonNumber ?? ''}`}
+      episodes={season?.episodes ?? []}
+      status={status}
+      error={error}
+      isNotFound={isNotFound}
     />
   )
 }
