@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 import { describe, expect, it, beforeEach } from 'vitest'
 import { AuthProvider, SESSION_STORAGE_KEY } from '@/Auth'
@@ -16,6 +16,7 @@ const renderApp = (initialEntry: string) => {
 
 describe('CineView smoke test', () => {
   beforeEach(() => {
+    cleanup()
     sessionStorage.clear()
   })
 
