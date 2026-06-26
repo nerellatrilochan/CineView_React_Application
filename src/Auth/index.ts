@@ -1,1 +1,6 @@
 export { LoginPage } from './ui/pages/LoginPage'
+export { AuthProvider } from './data/stores/providers'
+export { ProtectedRoute } from './ui/components/ProtectedRoute'
+export { GuestRoute } from './ui/components/GuestRoute'
+export { ShellLayout } from './ui/components/ShellLayout'
+export { SESSION_STORAGE_KEY } from './core/constants/Auth.constants'

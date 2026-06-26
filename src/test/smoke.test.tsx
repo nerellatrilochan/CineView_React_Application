@@ -1,18 +1,45 @@
 import { render, screen } from '@testing-library/react'
 import { createMemoryRouter, RouterProvider } from 'react-router-dom'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, beforeEach } from 'vitest'
+import { AuthProvider, SESSION_STORAGE_KEY } from '@/Auth'
 import { routes } from '@/router'
 
+const renderApp = (initialEntry: string) => {
+  const memoryRouter = createMemoryRouter(routes, { initialEntries: [initialEntry] })
+
+  return render(
+    <AuthProvider>
+      <RouterProvider router={memoryRouter} />
+    </AuthProvider>,
+  )
+}
+
 describe('CineView smoke test', () => {
-  it('renders the home page placeholder', () => {
-    const memoryRouter = createMemoryRouter(routes, { initialEntries: ['/'] })
-    render(<RouterProvider router={memoryRouter} />)
-    expect(screen.getByRole('heading', { name: /home/i })).toBeInTheDocument()
+  beforeEach(() => {
+    sessionStorage.clear()
   })
 
-  it('renders the login page placeholder', () => {
-    const memoryRouter = createMemoryRouter(routes, { initialEntries: ['/login'] })
-    render(<RouterProvider router={memoryRouter} />)
-    expect(screen.getByRole('heading', { name: /login/i })).toBeInTheDocument()
+  it('redirects unauthenticated users from home to login', async () => {
+    renderApp('/')
+    expect(await screen.findByRole('heading', { name: /sign in to cineview/i })).toBeInTheDocument()
+  })
+
+  it('renders the login page', () => {
+    renderApp('/login')
+    expect(screen.getByRole('heading', { name: /sign in to cineview/i })).toBeInTheDocument()
+  })
+
+  it('renders the home page when a session exists', async () => {
+    sessionStorage.setItem(
+      SESSION_STORAGE_KEY,
+      JSON.stringify({
+        username: 'cineview',
+        token: 'test-token',
+        createdAt: new Date().toISOString(),
+      }),
+    )
+
+    renderApp('/')
+    expect(await screen.findByRole('heading', { name: /home/i })).toBeInTheDocument()
   })
 })
