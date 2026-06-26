@@ -47,6 +47,7 @@ Desktop.ini
 
 # Editor / IDE
 .vscode/*
+.vscode/
 !.vscode/extensions.json
 !.vscode/settings.json
 .idea/
@@ -66,6 +67,14 @@ Desktop.ini
 *.tmp
 *.temp
 .cache/
+
+# Project specific files
+ProjectGuidelines.md
+CineView.md
+CleanCodeGuidelines.md
+CineView-Design.md
+references/
+setup.sh
 
 # Optional: uncomment if you use these tools later
 # .eslintcache
